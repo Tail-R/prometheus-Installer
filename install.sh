@@ -58,8 +58,6 @@ scrape_configs:
           - '192.168.100.20:9100'
           - '192.168.100.21:9100'
           - '192.168.100.40:9283'
-          - '192.168.100.41:9283'
-          - '192.168.100.42:9283'
 EOF
 
 chown prometheus:prometheus /etc/prometheus/prometheus.yaml
