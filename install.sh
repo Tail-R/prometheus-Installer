@@ -46,7 +46,7 @@ cp -r console_libraries /etc/prometheus
 chown -R prometheus:prometheus /etc/prometheus
 
 # Create Prometheus config
-cat <<EOF > /etc/prometheus/prometheus.yml
+cat <<EOF > /etc/prometheus/prometheus.yaml
 global:
   scrape_interval: 15s
 
@@ -57,8 +57,12 @@ scrape_configs:
           - '192.168.100.10:9100'
           - '192.168.100.20:9100'
           - '192.168.100.21:9100'
+          - '192.168.100.40:9283'
+          - '192.168.100.41:9283'
+          - '192.168.100.42:9283'
 EOF
-chown prometheus:prometheus /etc/prometheus/prometheus.yml
+
+chown prometheus:prometheus /etc/prometheus/prometheus.yaml
 
 # Create systemd service
 cat <<EOF > /etc/systemd/system/prometheus.service
@@ -72,7 +76,7 @@ User=prometheus
 Group=prometheus
 Type=simple
 ExecStart=/usr/local/bin/prometheus \
-  --config.file=/etc/prometheus/prometheus.yml \
+  --config.file=/etc/prometheus/prometheus.yaml \
   --storage.tsdb.path=/var/lib/prometheus/ \
   --web.listen-address=:9090
 
